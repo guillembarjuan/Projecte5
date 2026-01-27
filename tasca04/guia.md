@@ -165,17 +165,6 @@ Abans de començar la instal·lació, comparem els requisits mínims de Microsof
 - **Domain**: translogic01.test
 - El nom s'ha canviat a DCxx (on xx és el número de llista), en aquest cas DC01
 
-### Configuració de xarxa
-
-![Configuració de xarxa](/tasca04/img_t04/captura16.png)
-
-**Anàlisi**: Configuració de la interfície de xarxa:
-- **IP assignment**: Automatic (DHCP) - pel adaptador NAT
-- **IPv4 address**: 10.0.2.17 - assignat per DHCP del VirtualBox
-- **IPv4 default gateway**: 10.0.2.1
-- **Primary DNS suffix**: thematrix.local
-- La configuració NAT funciona correctament
-
 ## 7. Anàlisi de la configuració final
 
 ### Resum de la configuració implementada:
