@@ -2,6 +2,12 @@
 
 En aquesta guia documentarem la instal·lació i configuració d'un domini Active Directory sobre Windows Server 2025, creant un nou bosc i promocionant el servidor com a controlador de domini.
 
+### Configuració correcta zona i hora
+
+![Configuració correcta zona i hora](/tasca05/img_t05/28.png)
+
+Canviem la zona i hora del servidor
+
 ### Configuració de xarxa
 
 ![Configuració de xarxa](/tasca04/img_t04/captura16.png)
