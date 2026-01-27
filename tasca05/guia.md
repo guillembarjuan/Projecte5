@@ -2,6 +2,17 @@
 
 En aquesta guia documentarem la instal·lació i configuració d'un domini Active Directory sobre Windows Server 2025, creant un nou bosc i promocionant el servidor com a controlador de domini.
 
+### Configuració de xarxa
+
+![Configuració de xarxa](/tasca04/img_t04/captura16.png)
+
+**Anàlisi**: Configuració de la interfície de xarxa:
+- **IP assignment**: Automatic (DHCP) - pel adaptador NAT
+- **IPv4 address**: 10.0.2.17 - assignat per DHCP del VirtualBox
+- **IPv4 default gateway**: 10.0.2.1
+- **Primary DNS suffix**: thematrix.local
+- La configuració NAT funciona correctament
+
 ## 1. Accés al Server Manager
 
 ### Dashboard inicial
