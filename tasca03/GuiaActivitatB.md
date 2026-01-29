@@ -12,7 +12,7 @@ Abans de configurar sFTP, necessitem assegurar-nos que el servidor SSH està ins
 sudo apt install openssh-server -y
 ```
 
-![Verificació de la instal·lació d'OpenSSH](/tasca03/img_t03/activitatB_captura1.png)
+![Verificació de la instal·lació d'OpenSSH](/tasca03/img_t03_p2/captura1.png)
 
 La sortida mostra que:
 - **`openssh-server` ja está en su versión más reciente**: Indica que el servei ja està instal·lat
@@ -28,7 +28,7 @@ Abans de configurar les restriccions, provem una connexió SSH estàndard des de
 sftp usuari@192.168.56.115
 ```
 
-![Primera connexió SFTP des del client Windows](/tasca03/img_t03/activitatB_captura2.png)
+![Primera connexió SFTP des del client Windows](/tasca03/img_t03_p2/captura2.png)
 
 El procés de connexió inicial mostra:
 
@@ -54,7 +54,7 @@ Un cop connectats, podem explorar les comandes disponibles al client sFTP.
 ?
 ```
 
-![Llista de comandes disponibles a sFTP](/tasca03/img_t03/activitatB_captura3.png)
+![Llista de comandes disponibles a sFTP](/tasca03/img_t03_p2/captura3.png)
 
 Les comandes principals de sFTP inclouen:
 
@@ -75,7 +75,7 @@ pwd
 ls
 ```
 
-![Accés no restringit al sistema de fitxers](/tasca03/img_t03/activitatB_captura4.png)
+![Accés no restringit al sistema de fitxers](/tasca03/img_t03_p2/captura4.png)
 
 **Problema identificat**:
 - L'usuari connectat via sFTP pot **navegar per tot el sistema de fitxers**
@@ -98,7 +98,7 @@ Per solucionar el problema de seguretat, configurarem l'engabiament (chroot) per
 sudo nano /etc/ssh/sshd_config
 ```
 
-![Edició del fitxer de configuració SSH](/tasca03/img_t03/activitatB_captura5.png)
+![Edició del fitxer de configuració SSH](/tasca03/img_t03_p2/captura5.png)
 
 ### **2.2. Configuració de Grups i Restriccions**
 Afegim la configuració d'engabiament al final del fitxer `sshd_config`:
@@ -113,7 +113,7 @@ Match Group admins
     ForceCommand internal-sftp
 ```
 
-![Configuració d'engabiament per al grup admins](/tasca03/img_t03/activitatB_captura6.png)
+![Configuració d'engabiament per al grup admins](/tasca03/img_t03_p2/captura6.png)
 
 **Aquesta configuració estableix**:
 
@@ -133,7 +133,7 @@ sudo useradd -G admins admin1
 sudo passwd admin1
 ```
 
-![Creació del grup admins i usuari admin1](/tasca03/img_t03/activitatB_captura7.png)
+![Creació del grup admins i usuari admin1](/tasca03/img_t03_p2/captura7.png)
 
 **Detalls de la creació**:
 - **Grup 'admins'**: Creat amb GID 1003
@@ -148,7 +148,7 @@ sudo mkdir /var/data
 ls -l /var
 ```
 
-![Creació del directori /var/data](/tasca03/img_t03/activitatB_captura8.png)
+![Creació del directori /var/data](/tasca03/img_t03_p2/captura8.png)
 
 **Requisits del directori chroot**:
 1. **Propietari root**: El directori chroot ha de ser propietat de `root:root`
@@ -162,7 +162,7 @@ Dins del chroot, creem estructures per als usuaris.
 sudo mkdir /var/data/files
 ```
 
-![Creació del subdirectori files dins del chroot](/tasca03/img_t03/activitatB_captura9.png)
+![Creació del subdirectori files dins del chroot](/tasca03/img_t03_p2/captura9.png)
 
 ### **2.6. Configuració de Permisos per al Grup**
 Assignem permisos adequats per al grup 'admins'.
@@ -173,7 +173,7 @@ sudo chmod 2770 /var/data/files/
 ls -l /var/data/
 ```
 
-![Configuració de permisos del directori files](/tasca03/img_t03/activitatB_captura10.png)
+![Configuració de permisos del directori files](/tasca03/img_t03_p2/captura10.png)
 
 **Anàlisi dels permisos**:
 - **`drwxrws---`**: Desglossament:
@@ -193,7 +193,7 @@ sudo systemctl restart ssh
 sudo systemctl status ssh
 ```
 
-![Reinici i verificació del servei SSH](/tasca03/img_t03/activitatB_captura11.png)
+![Reinici i verificació del servei SSH](/tasca03/img_t03_p2/captura11.png)
 
 **Verificació de l'estat**:
 - **Servei actiu**: "active (running)"
@@ -212,7 +212,7 @@ Provem d'accedir via SSH normal amb l'usuari admin1.
 ssh admin1@192.168.56.115
 ```
 
-![Intento d'accés SSH amb usuari admin1](/tasca03/img_t03/activitatB_captura12.png)
+![Intento d'accés SSH amb usuari admin1](/tasca03/img_t03_p2/captura12.png)
 
 **Resultat important**:
 - **"PTY allocation request failed on channel 0"**: L'accés SSH està bloquejat
@@ -226,7 +226,7 @@ Ara provem l'accés via sFTP amb l'usuari admin1.
 sftp admin1@192.168.56.115
 ```
 
-![Connexió sFTP exitosa amb usuari admin1](/tasca03/img_t03/activitatB_captura13.png)
+![Connexió sFTP exitosa amb usuari admin1](/tasca03/img_t03_p2/captura13.png)
 
 **Observacions**:
 - **Connexió exitosa**: "Connected to 192.168.56.115"
